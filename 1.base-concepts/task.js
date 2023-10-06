@@ -17,6 +17,11 @@ function solveEquation(a, b, c) {
   }
 }
 
-function calculateTotalMortgage(percent, contribution, amount, countMonths) {
-  
+function calculateTotalMortgage(percent, contribution, amount, countMonths) { //((проценты, взнос, сумма, количество месяцев)
+percent = percent/100/12;
+let bodyC = amount - contribution;
+let monPay = bodyC * (percent + (percent / (((1 + percent) ** countMonths) - 1)))
+let sum = monPay *  countMonths;
+sum = Number(sum.toFixed(2))
+return sum
 }
