@@ -99,3 +99,53 @@ class Library {
 }
 
 /* _____________________ЗАДАЧА-3______________________________ */
+
+class Student {
+  constructor(name) {
+    this.name = name;
+    this.marks = {};
+  }
+  /*   addMark(mark, subject) {
+    if (this.marks?.[subject] === undefined && mark >= 2 && mark <= 5) {
+    this.marks[subject] = [];
+    this.marks[subject].push(mark);
+  } else if (this.marks.hasOwnProperty(subject) && mark >= 2 && mark <= 5) {
+    this.marks[subject].push(mark);
+  }
+} */
+  addMark(mark, subjectname) {
+    if (
+      this.marks.hasOwnProperty(subjectname) === false &&
+      mark >= 2 &&
+      mark <= 5
+    ) {
+      this.marks[subjectname] = [];
+      this.marks[subjectname].push(mark);
+    } else if (mark >= 2 && mark <= 5) {
+      this.marks[subjectname].push(mark);
+    }
+  }
+
+  getAverageBySubject(subjectname) {
+    if (this.marks.hasOwnProperty(subjectname) !== true) {
+      return 0;
+    } else {
+      return (
+        this.marks[subjectname].reduce((acc, item) => acc + item, 0) /
+        this.marks[subjectname].length
+      );
+    }
+  }
+
+  getAverage() {
+    if (Object.keys(this.marks).length === 0) {
+      return 0;
+    }
+    return (
+      Object.keys(this.marks).reduce(
+        (acc, item) => acc + this.getAverageBySubject(item),
+        0
+      ) / Object.keys(this.marks).length
+    );
+  }
+}
