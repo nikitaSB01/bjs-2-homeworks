@@ -78,23 +78,15 @@ class Library {
   }
 
   findBookBy(type, value) {
-    let findBook = this.books.find((book) => book[type] === value);
-    if (typeof findBook === "object") {
-      return findBook;
-    } else {
-      return null;
-    }
+    const findResult = this.books.find((item) => item[type] === value);
+    return findResult || null;
   }
 
   giveBookByName(bookName) {
-    let giveBoook = this.books.find((book) => book.name === bookName);
-    if (typeof giveBoook === "object") {
-      let indexBook = this.books.indexOf(giveBoook);
-      this.books.splice(indexBook, 1);
-      return giveBoook;
-    } else {
-      return null;
-    }
+    const book = this.findBookBy("name", bookName);
+    if (!book) return null;
+    this.books = this.books.filter((item) => item.name !== bookName);
+    return book;
   }
 }
 
@@ -105,14 +97,6 @@ class Student {
     this.name = name;
     this.marks = {};
   }
-  /*   addMark(mark, subject) {
-    if (this.marks?.[subject] === undefined && mark >= 2 && mark <= 5) {
-    this.marks[subject] = [];
-    this.marks[subject].push(mark);
-  } else if (this.marks.hasOwnProperty(subject) && mark >= 2 && mark <= 5) {
-    this.marks[subject].push(mark);
-  }
-} */
   addMark(mark, subjectname) {
     if (
       this.marks.hasOwnProperty(subjectname) === false &&
